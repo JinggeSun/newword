@@ -1,16 +1,12 @@
 package com.sun.learn;
 
-import akka.stream.impl.fusing.GroupBy;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.FlatMapFunction;
-import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.DataSource;
-import org.apache.flink.api.java.operators.MapOperator;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
-import sun.tools.jconsole.inspector.XObject;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,14 +26,14 @@ public class DataSetTransfromationsLearn {
 
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-        DataSource<String> dataSource = env.fromCollection(getList());
-
-        dataSource.map(new MapFunction<String, Object>() {
-            @Override
-            public Object map(String s) throws Exception {
-                return s.toUpperCase();
-            }
-        }).print();
+//        DataSource<String> dataSource = env.fromCollection(getList());
+//
+//        dataSource.map(new MapFunction<String, Object>() {
+//            @Override
+//            public Object map(String s) throws Exception {
+//                return s.toUpperCase();
+//            }
+//        }).print();
 
 //        DataSource<String> dataSource = env.fromElements(getStr());
 //

@@ -27,12 +27,14 @@ public class StreamingSocketWordCount {
             ParameterTool tool = ParameterTool.fromArgs(args);
             prot = tool.getInt("port");
         }catch (Exception e){
-            prot = 99199;
+            prot = 9999;
         }
 
         System.out.println(prot);
 
+
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
 
         DataStreamSource<String> source =  env.socketTextStream("127.0.0.1",9999);
 
