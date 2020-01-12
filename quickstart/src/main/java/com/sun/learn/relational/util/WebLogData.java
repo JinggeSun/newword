@@ -2,10 +2,8 @@ package com.sun.learn.relational.util;
 
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
-import scala.Int;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -402,9 +400,14 @@ public class WebLogData {
         return env.fromCollection(list);
     }
 
+    /**
+     * 地址，时间
+     * @param env
+     * @return
+     */
     public static DataSet<Tuple2<String,String>> getVisitDataSet(ExecutionEnvironment env){
         List<Tuple2<String,String>> list = new ArrayList<>();
-        Arrays.stream(RANKS).forEach(w->list.add(new Tuple2<String, String>((String) w[0], (String) w[1])));
+        Arrays.stream(VISITS).forEach(w->list.add(new Tuple2<String, String>(w[0].toString(),w[1].toString())));
         return env.fromCollection(list);
     }
 

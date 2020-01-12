@@ -25,7 +25,5 @@ public class DataSetText {
 
         csvInput.print();
 
-
-
     }
 }
