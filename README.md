@@ -28,3 +28,8 @@ mvn clean package -DskipTests
 ```
 flink run -p 3 -c classname quickstart-0.1.jar
 ```
+
+## flink 后台启动
+./bin/start-cluster.sh
+### web
+http://localhost:8081/

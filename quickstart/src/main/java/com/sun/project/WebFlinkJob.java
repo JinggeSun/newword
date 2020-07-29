@@ -43,8 +43,7 @@ public class WebFlinkJob {
         DataStreamSource<String> source = env.addSource(consumer);
 
         // transformation
-        source.flatMap(new FlatMapFunction<String, >() {
-        })
+        
 
 
 

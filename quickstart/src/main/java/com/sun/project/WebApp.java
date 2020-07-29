@@ -6,6 +6,8 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.Random;
 
@@ -22,7 +24,7 @@ public class WebApp {
         // kafka配置
         Properties properties = new Properties();
         // server
-        properties.setProperty("bootstrap.servers", "172.172.100.116:9092");
+        properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
         // key
         properties.setProperty("key.serializer", StringSerializer.class.getName());
         // value
@@ -36,13 +38,13 @@ public class WebApp {
 
         int count = 1;
 
-        while (count > 100){
+        while (count < 100){
 
             StringBuilder builder = new StringBuilder();
             builder.append("sun").append("\t")
                     .append("CN").append("\t")
                     .append(getLevels()).append("\t")
-                    .append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(LocalDate.now())).append("\t")
+                    .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\t")
                     .append(getIps()).append("\t")
                     .append(getDomains()).append("\t")
                     .append(getTraffic()).append("\t");
