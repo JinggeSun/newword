@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de70918f-ddee-4f32-ba9d-56ad2b20e6d5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../lin/lin-cms-vue-0.2.x/src/config/stage/student.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lin/lin-cms-vue-0.2.x/src/views/student/StudentAdd.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lin/lin-cms-vue-0.2.x/src/views/student/StudentList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/openTheDoor.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_util.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/door_config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/close_door.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/door.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lin/starter" beforeDir="false" afterPath="$PROJECT_DIR$/../lin/starter" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1596941076538</updated>
       <workItem from="1596941077708" duration="9151000" />
+      <workItem from="1597028835134" duration="167000" />
     </task>
     <servers />
   </component>
