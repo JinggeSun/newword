@@ -9,6 +9,10 @@ def get_now_time():
     cc = time.localtime(time.time())
     return cc
 
+def get_now_time_str():
+    cc = time.strftime('%Y-%m-%d %H:%M:%S', get_now_time())
+    return cc
+
 def get_week_and_hour():
     cc = get_now_time();
     week = cc.tm_wday

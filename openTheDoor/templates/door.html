@@ -115,17 +115,12 @@
             },
             commitContent: function () {
                 var that = this;
-                var parma = {
-                    weeklyList: that.weeklyList,
-                    planList: that.planList,
-                    questionList: that.questionList
-                }
 
                 // 提交给后台
                 axios({
                     method: 'post',
                     url: '/door/save_week_content',
-                    data: parma
+                    data: {'weeklyList':that.weeklyList,'planList':that.planList,'questionList':that.questionList}
                 }).then(function (response) {
                     console.log(response);
                 }).catch(function (error) {
