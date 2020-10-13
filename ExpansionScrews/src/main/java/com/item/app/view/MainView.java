@@ -89,7 +89,7 @@ public class MainView {
         JTabbedPane jTabbedPane = new JTabbedPane();
 
         jTabbedPane.addTab("服务",serverPanel());
-        jTabbedPane.addTab("日志",logTablePanel());
+       // jTabbedPane.addTab("日志",logTablePanel());
 
         jFrame.add(jTabbedPane);
         jFrame.setJMenuBar(jMenuBar);

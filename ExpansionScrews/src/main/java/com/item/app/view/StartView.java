@@ -34,14 +34,10 @@ public class StartView {
 
         JPanel panel = new JPanel(null);
 
-        Icon icon=new ImageIcon("src/com/item/app/view/screw.png");
-        JLabel lb = new JLabel(icon);
-        lb.setBounds(20,20,250,100);
-
         // 功能介绍
         JLabel introduceLabel = new JLabel();
         introduceLabel.setText(ConfigApp.INTRODUCE);
-       // introduceLabel.setBounds(20,20,250,100);
+        introduceLabel.setBounds(20,20,250,100);
 
         // 使用按钮
         JButton btn = new JButton("开始使用");
@@ -55,11 +51,10 @@ public class StartView {
         });
 
         // 版本介绍
-        JLabel jLabel = new JLabel("www.pzls.com@2020");
-        jLabel.setBounds(85,190,200,40);
+        JLabel jLabel = new JLabel("github.com/JinggeSun@2020");
+        jLabel.setBounds(65,190,200,40);
 
-
-        panel.add(lb);
+        panel.add(introduceLabel);
         panel.add(btn);
         panel.add(jLabel);
 

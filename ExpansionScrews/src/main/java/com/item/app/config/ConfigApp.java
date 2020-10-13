@@ -24,10 +24,10 @@ public class ConfigApp {
     private static final Map<String, Object> EXPORT_TYPE = new LinkedHashMap<>();
 
     static {
-        DA_SUPPORT.put("请选择",new DbModel());
-        DA_SUPPORT.put("MySQL",new DbModel("com.mysql.jdbc.Driver","127.0.0.1","root","","3306","表名"));
-        DA_SUPPORT.put("Oracle",new DbModel("oracle.jdbc.driver.OracleDriver","127.0.0.1","sa","","1521","表名"));
-        DA_SUPPORT.put("SQL Server",new DbModel("com.microsoft.sqlserver.jdbc.SQLServerDriver","127.0.0.1","sa","","1433","表名"));
+        DA_SUPPORT.put("请选择",new DbModel("","","","","","数据库"));
+        DA_SUPPORT.put("MySQL",new DbModel("com.mysql.jdbc.Driver","127.0.0.1","root","","3306","数据库"));
+        DA_SUPPORT.put("Oracle",new DbModel("oracle.jdbc.driver.OracleDriver","127.0.0.1","sys","","1521","实例名"));
+        DA_SUPPORT.put("SQL Server",new DbModel("com.microsoft.sqlserver.jdbc.SQLServerDriver","127.0.0.1","sa","","1433","数据库"));
 
         EXPORT_TYPE.put("html",EngineFileType.HTML);
         EXPORT_TYPE.put("word",EngineFileType.WORD);
