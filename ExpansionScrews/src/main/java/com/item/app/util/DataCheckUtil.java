@@ -16,7 +16,7 @@ public class DataCheckUtil {
      * @return
      */
     public static boolean checkStringEmpty(String ... stringParam){
-        AtomicBoolean flag = new AtomicBoolean(false);
+        AtomicBoolean flag = new AtomicBoolean(true);
 
         Arrays.stream(stringParam).forEach(param->{
             if (StringUtils.isEmpty(param)){

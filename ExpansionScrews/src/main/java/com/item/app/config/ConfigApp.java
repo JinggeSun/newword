@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public class ConfigApp {
 
+    public static final String INTRODUCE = "<html><body><p align=\\\"center\\\">膨胀螺丝是一款离据库文档导出工具<br/>核心功能是基于开源工具Screw<br/>主要特点：<br/>1. 完全离线,不会记录用户任何信息;<br/>2. Screw支持主流数据库文档的导出;<br/>3. 跨平台支持;<br/></p></body></html>";
+
     public static String getVersion() {
         return "2020";
     }
@@ -31,6 +33,13 @@ public class ConfigApp {
         EXPORT_TYPE.put("word",EngineFileType.WORD);
     }
 
+    public static String getDriverByKey(String key){
+        if (DA_SUPPORT.containsKey(key)){
+            DbModel dbModel = DA_SUPPORT.get(key);
+            return dbModel.getDriverName();
+        }
+        return null;
+    }
 
 
 
@@ -57,5 +66,24 @@ public class ConfigApp {
             i[0] += 1;
         });
         return type;
+    }
+
+
+
+
+    public static String getJdbcUrl(String type,String ipStr,String port,String tableName){
+        //mysql
+        //jdbc:mysql://127.0.0.1:3306/RefuelingWuhan
+        if ("MySQL".equals(type)){
+            return String.format("jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf8&useSSL=false\n",ipStr,port,tableName);
+        }
+
+        return null;
+    }
+
+    public static void main(String[] args) {
+        String jdbcUrl = getJdbcUrl("MySQL", "127.0.0.1", "3389", "DD");
+        System.out.println(jdbcUrl);
+
     }
 }

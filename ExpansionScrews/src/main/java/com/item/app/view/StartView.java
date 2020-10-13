@@ -1,5 +1,7 @@
 package com.item.app.view;
 
+import com.item.app.config.ConfigApp;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,7 +17,7 @@ public class StartView {
          */
         JFrame jf = new JFrame("膨胀螺丝");
         /// 设置窗口大小
-        jf.setSize(250, 250);
+        jf.setSize(300, 250);
         // 把窗口位置设置到屏幕中心
         jf.setLocationRelativeTo(null);
         // 当点击窗口的关闭按钮时退出程序
@@ -30,12 +32,20 @@ public class StartView {
         FlowLayout flowLayout = new FlowLayout();
         flowLayout.setAlignment(FlowLayout.CENTER);
 
-        JPanel panel = new JPanel(flowLayout);
+        JPanel panel = new JPanel(null);
+
+        Icon icon=new ImageIcon("src/com/item/app/view/screw.png");
+        JLabel lb = new JLabel(icon);
+        lb.setBounds(20,20,250,100);
+
+        // 功能介绍
+        JLabel introduceLabel = new JLabel();
+        introduceLabel.setText(ConfigApp.INTRODUCE);
+       // introduceLabel.setBounds(20,20,250,100);
 
         // 使用按钮
         JButton btn = new JButton("开始使用");
-        btn.setLocation(50, 50);
-
+        btn.setBounds(100,150,100,40);
         btn.addActionListener(event->{
             //打开新的窗口
             new MainView().showView();
@@ -46,8 +56,10 @@ public class StartView {
 
         // 版本介绍
         JLabel jLabel = new JLabel("www.pzls.com@2020");
+        jLabel.setBounds(85,190,200,40);
 
 
+        panel.add(lb);
         panel.add(btn);
         panel.add(jLabel);
 

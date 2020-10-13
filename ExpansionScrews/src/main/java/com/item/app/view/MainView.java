@@ -4,12 +4,16 @@ import com.item.app.config.ConfigApp;
 import com.item.app.model.DbModel;
 import com.item.app.model.ScrewModel;
 import com.item.app.util.DataCheckUtil;
+import com.item.app.util.DbUtil;
+import com.item.app.util.ScrewUtil;
 import org.springframework.util.StringUtils;
 
+import javax.sql.DataSource;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.util.Arrays;
 
 /**
@@ -49,7 +53,7 @@ public class MainView {
         JMenuBar jMenuBar = new JMenuBar();
         //一级菜单
         JMenu jMenuInfo = new JMenu("信息");
-        JMenu jMenuWin = new JMenu("窗口");
+        JMenu jMenuWin = new JMenu("高级");
         JMenu jMenuHelp = new JMenu("帮助");
 
         //菜单item
@@ -57,8 +61,8 @@ public class MainView {
         JMenuItem jMenuItemSer = new JMenuItem("服务");
         JMenuItem jMenuItemVer = new JMenuItem("版本");
 
-        JMenuItem jMenuItemMax = new JMenuItem("最大");
-        JMenuItem jMenuItemHid = new JMenuItem("隐藏");
+        JMenuItem jMenuItemMax = new JMenuItem("查询");
+        JMenuItem jMenuItemHid = new JMenuItem("分析");
 
         JMenuItem jMenuItemDoc = new JMenuItem("文档");
         JMenuItem jMenuItemAbo = new JMenuItem("联系");
@@ -147,6 +151,7 @@ public class MainView {
         exportField = new JTextField(8);
         exportField.setBounds(175,210,160,30);
         exportField.setFont(new Font(null, Font.PLAIN, 16));
+        exportField.setEditable(false);
         JButton exportButton = new JButton("选择");
         exportButton.setBounds(345,215,30,20);
 
@@ -175,6 +180,19 @@ public class MainView {
         });
 
         /**
+         * 选择文件
+         */
+        exportButton.addActionListener(action->{
+            JFileChooser jf = new JFileChooser();
+            jf.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            jf.showOpenDialog(jPanel);//显示打开的文件对话框
+            File f =  jf.getSelectedFile();//使用文件类获取选择器选择的文件
+            String s = f.getAbsolutePath();//返回路径名
+            //赋值exportField
+            exportField.setText(s);
+        });
+
+        /**
          * 测试链接
          */
         testButton.addActionListener(action->{
@@ -183,13 +201,41 @@ public class MainView {
 
             if (model == null){
                 JOptionPane.showMessageDialog(null, "请填写完整信息!");
-            }else{
-
+                return;
             }
-
+            //将实体发送给jdbc工具类
+            String connectFlag = DbUtil.connectTest(model);
+            if (connectFlag.length() > 0){
+                JOptionPane.showMessageDialog(null, "数据库连接失败，请检查,"+connectFlag);
+                return ;
+            }
+            JOptionPane.showMessageDialog(null, "数据库连接成功!");
         });
 
+        /**
+         * 导出文档
+         */
+        saveButton.addActionListener(action->{
+            //1. 验证输入信息
+            ScrewModel model = checkInputParam();
 
+            if (model == null){
+                JOptionPane.showMessageDialog(null, "请填写完整信息!");
+                return;
+            }
+            //将实体发送给jdbc工具类
+            String connectFlag = DbUtil.connectTest(model);
+            if (connectFlag.length() > 0){
+                JOptionPane.showMessageDialog(null, "数据库连接失败，请检查,"+connectFlag);
+                return ;
+            }
+            //数据库验证完毕，开始使用screw导出
+            DataSource dataSource = DbUtil.getDataSource(model);
+            String msg = ScrewUtil.exportDoc(model.getFileOutputDir(),dataSource);
+
+            JOptionPane.showMessageDialog(null, msg);
+
+        });
 
         //加载
         jPanel.add(dbLabel);
@@ -227,7 +273,7 @@ public class MainView {
         String portFieldParam = portField.getText();
         String tableFieldParam = tableField.getText();
         String usernameFieldParam = usernameField.getText();
-        String passwordFieldParam = Arrays.toString(passwordField.getPassword());
+        String passwordFieldParam = String.valueOf(passwordField.getPassword());
         String exportFieldParam = exportField.getText();
 
         boolean flag = DataCheckUtil.checkStringEmpty(dbComboParam,ipFieldParam,portFieldParam,tableFieldParam,usernameFieldParam,passwordFieldParam,exportFieldParam);
@@ -236,9 +282,16 @@ public class MainView {
             return null;
         }
 
-
-
-
+        //填写的数据赋值给实体
+        //用户名
+        screwModel.setUserName(usernameFieldParam);
+        //密码
+        screwModel.setPassword(passwordFieldParam);
+        //驱动
+        screwModel.setDriverClassName(ConfigApp.getDriverByKey(dbComboParam));
+        //连接
+        String url = ConfigApp.getJdbcUrl(dbComboParam,ipFieldParam,portFieldParam,tableFieldParam);
+        screwModel.setJdbcUrl(url);
         return screwModel;
     }
 
