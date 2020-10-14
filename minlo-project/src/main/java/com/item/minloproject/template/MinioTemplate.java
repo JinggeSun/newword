@@ -5,6 +5,7 @@ import io.minio.MinioClient;
 import io.minio.errors.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * @author zcm
  */
+@Component
 public class MinioTemplate {
 
     /**

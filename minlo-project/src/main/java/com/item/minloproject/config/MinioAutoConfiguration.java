@@ -24,7 +24,7 @@ public class MinioAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public MinioClient minioClient(MinioProp minioProp) throws InvalidPortException, InvalidEndpointException, InvalidKeyException, ErrorResponseException, IllegalArgumentException, InsufficientDataException, InternalException, InvalidBucketNameException, InvalidResponseException, NoSuchAlgorithmException, XmlParserException, RegionConflictException, IOException {
-        MinioClient client = new MinioClient(minioProp.getEndPoint(), minioProp.getAccessKey(), minioProp.getSecretKey());
+        MinioClient client = new MinioClient(minioProp.getEndpoint(), minioProp.getAccessKey(), minioProp.getSecretKey());
         if(!client.bucketExists(minioProp.getBucketName()))
         {
             client.makeBucket(minioProp.getBucketName());
