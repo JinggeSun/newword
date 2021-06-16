@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>js读取Excel文件</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class="Body noover">
+    <input type="file" id="file"/>
+    <div id="demo"></div>
+    <button onclick="readExcel()">读取excel</button>
+    <div id="container" style="height: 500px;width:100%"></div>
+</body>
+<script src="./jquery-2.1.1.min.js"></script>
+<script src="./sheetjs/xlsx.full.min.js"></script>
+<script src="./echars/echarts.min.js"></script>
+<script type="text/javascript">
+
+    // 读取本地excel文件
+    function readWorkbookFromLocalFile(file, flag) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+		    var data = e.target.result;
+		    var workbook = XLSX.read(data, {type: 'binary',raw: true});
+		    if(flag){
+                outputWorkbook(workbook,file.name);
+            }
+	    };
+	    reader.readAsBinaryString(file);
+    }
+
+    // 读取 excel文件
+    function outputWorkbook(workbook,fileName) {
+	    var sheetNames = workbook.SheetNames; // 工作表名称集合
+	    
+        var xList = []
+        var yList = []
+        //A3: {t: "n", v: 44290.1678703704, w: "4/4/21 4:01"}
+
+        for(var i=0;i<sheetNames.length;i++){
+            var name = sheetNames[i];
+            var worksheet = workbook.Sheets[name]; // 只能通过工作表名称来获取指定工作表
+            // 目前只读第一个sheet页
+		    for(var key in worksheet) {
+                if (key.indexOf("A") != -1 && worksheet[key].t === 'n'){
+                    var timestr = formatDate(worksheet[key].v,'/');
+                    xList.push(timestr)
+                }
+                if (key.indexOf("B") != -1 && worksheet[key].t === 'n'){
+                    yList.push(worksheet[key].v)
+                }
+		    }
+            //只走第一个sheet页面
+            break;
+        }
+      
+        //把最后的汇总去掉
+        yList.pop();
+        initChart(fileName,xList,yList)
+
+    }
+
+    function readExcel(){
+        // 第一步，读取选中文件的文件名
+        var selectedFile = document.getElementById('file').files[0];
+
+        if (selectedFile === null || selectedFile === undefined){
+            alert("请选择excel")
+            return false;
+        }
+
+        var name = selectedFile.name;//
+        // 第二步，进行验证
+        // .xlsx 包含
+        if (name.indexOf('.xlsx') == -1){
+            alert("请选择正确excel文件。以xlsx为结尾！")
+            return false;
+        }
+        // 第三步，进行解析
+        readWorkbookFromLocalFile(selectedFile,true)
+    }
+
+
+
+    function initChart(name,xlist,ylist){
+        var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+
+var option = null;
+        option = {
+    title: {
+        text: name,
+        left: 'center'    
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data: ['值'],
+        right: 200
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        data: xlist
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: '值',
+            type: 'line',
+            step: 'start',
+            data: ylist
+        }
+    ]
+};
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option,true);
+}
+}
+
+
+    function formatDate(numb, format) {
+      const time = new Date((numb - 1) * 24 * 3600000 + 1)
+
+      var da = dateFormat("YYYY-mm-dd HH:MM:SS",new Date(time));
+      
+      return da;
+    }
+
+    function dateFormat(fmt, date) {
+    let ret;
+    const opt = {
+        "Y+": (date.getFullYear() - 70).toString(),        // 年
+        "m+": (date.getMonth() + 1).toString(),     // 月
+        "d+": (date.getDate() - 1).toString(),            // 日
+        "H+": date.getHours().toString(),           // 时
+        "M+": date.getMinutes().toString(),         // 分
+        "S+": date.getSeconds().toString()          // 秒
+        // 有其他格式化字符需求可以继续添加，必须转化成字符串
+    };
+    for (let k in opt) {
+        ret = new RegExp("(" + k + ")").exec(fmt);
+        if (ret) {
+            fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+        };
+    };
+    return fmt;
+    }
+</script>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<style>
+    .el-footer {
+        background-color: #B3C0D1;
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+        margin-top: 30px;
+    }
+
+    .el-card__body {
+        padding: 0px;
+    }
+
+    .el-menu-item {
+        width: 180px;
+        font-size: 22px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .el-aside {
+        background-color: #D3DCE6;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+
+    .el-main {
+        color: #333;
+        text-align: center;
+    }
+
+    .el-container:nth-child(5) .el-aside,
+    .el-container:nth-child(6) .el-aside {
+        line-height: 260px;
+    }
+
+    .el-menu--collapse .el-menu .el-submenu {
+        width: 300px;
+    }
+
+    .el-container:nth-child(7) .el-aside {
+        line-height: 320px;
+    }
+
+    .box-card {
+        height: 100%;
+    }
+
+    .time {
+        font-size: 13px;
+        color: #999;
+    }
+
+    .bottom {
+        margin-top: 13px;
+        line-height: 12px;
+    }
+
+    .button {
+        padding: 0;
+        float: right;
+    }
+
+    .image {
+        width: 100%;
+        display: block;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+
+    .clearfix:after {
+        clear: both
+    }
+
+    html,
+    body,
+    #app,
+    .el-container {
+        /*设置内部填充为0，几个布局元素之间没有间距*/
+        padding: 0px;
+        /*外部间距也是如此设置*/
+        margin: 0px;
+        /*统一设置高度为100%*/
+        height: 100%;
+    }
+
+    .content-img {
+        width: 200px;
+        height: 200px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header style="width: 100%;padding:0;">
+                <el-card class="box-card" shadow="always" style="border-radius:0">
+                    <el-row gutter="20">
+                        <el-col :span="4">
+                            <div class="block" style="text-align: right;margin-top: 6px">
+                                <el-image :src="src"></el-image>
+                            </div>
+                        </el-col>
+                        <el-col :span="16">
+                            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"
+                                @select="handleSelect">
+                                <el-menu-item index="1">首页</el-menu-item>
+                                <el-menu-item index="2">文章列表</el-menu-item>
+                                <el-menu-item index="4">文章搜索</el-menu-item>
+                                <el-menu-item index="5">待办事项</el-menu-item>
+                                <el-menu-item index="7">关于我们</el-menu-item>
+                            </el-menu>
+                        </el-col>
+                        <el-col :span="4" :offset="0">
+                            <div class="block" style="text-align: left;margin-top: 6px">
+                                <el-image :src="sea"></el-image>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-card>
+            </el-header>
+            <el-main style="width: 100%;padding:0;">
+                <el-row gutter="20" style="margin-top: 10px;">
+                    <el-col :span="3">
+                        <!-- 预留位置 -->
+                    </el-col>
+                    <el-col :span="18" :offset="3">
+                        <el-row gutter="20">
+                            <el-col :span="16">
+                                <el-row gutter="24" style="margin-top: 20px;">
+                                    <el-col :span="8">
+                                        <img style="width: 200px;height: 140px;" class='content-img'
+                                            src="http://zf022006.demo.kangjingept.com/demo179/uploads/200330/1-2003301I501459.gif">
+                                    </el-col>
+                                    <el-col :span="16" style="text-align: justify">
+                                        <el-row>
+                                            <span style="font-size: 24px;font-weight: bold;">将Word2013文档设为最终版本
+                                            </span>
+                                        </el-row>
+                                        <el-row style="margin-top: 10px;">
+                                            <span>
+                                                我们做好了一份文档，并不希望别人进行更改，出了加密的方法还有什么方法呢？文档加密，总是给人一种不友好的感觉，下面，我教大家另外一种方法，将文档标记为最终状态，让人不能编辑。
+                                            </span>
+                                        </el-row>
+                                        <el-row style="margin-top: 10px;">
+                                            <el-col :span="8">分类：厄尔</el-col>
+                                            <el-col :span="8">时间：2020-01-01</el-col>
+                                            <el-col :span="8">阅读量：222</el-col>
+                                        </el-row>
+                                    </el-col>
+                                </el-row>
+                                <el-row gutter="24" style="margin-top: 20px;">
+                                    <el-col :span="8">
+                                        <img style="width: 200px;height: 140px;" class='content-img'
+                                            src="http://zf022006.demo.kangjingept.com/demo179/uploads/200330/1-2003301I501459.gif">
+                                    </el-col>
+                                    <el-col :span="16" style="text-align: justify">
+                                        <el-row>
+                                            <span style="font-size: 24px;font-weight: bold;">将Word2013文档设为最终版本
+                                            </span>
+                                        </el-row>
+                                        <el-row style="margin-top: 10px;">
+                                            <span>
+                                                我们做好了一份文档，并不希望别人进行更改，出了加密的方法还有什么方法呢？文档加密，总是给人一种不友好的感觉，下面，我教大家另外一种方法，将文档标记为最终状态，让人不能编辑。
+                                            </span>
+                                        </el-row>
+                                        <el-row style="margin-top: 10px;">
+                                            <el-col :span="8">分类：厄尔</el-col>
+                                            <el-col :span="8">时间：2020-01-01</el-col>
+                                            <el-col :span="8">阅读量：222</el-col>
+                                        </el-row>
+                                    </el-col>
+                                </el-row>
+                                <el-row gutter="24" style="margin-top: 20px;">
+                                    <el-col :span="8">
+                                        <img style="width: 200px;height: 140px;" class='content-img'
+                                            src="http://zf022006.demo.kangjingept.com/demo179/uploads/200330/1-2003301I501459.gif">
+                                    </el-col>
+                                    <el-col :span="16" style="text-align: justify">
+                                        <el-row>
+                                            <span style="font-size: 24px;font-weight: bold;">将Word2013文档设为最终版本
+                                            </span>
+                                        </el-row>
+                                        <el-row style="margin-top: 10px;">
+                                            <span>
+                                                我们做好了一份文档，并不希望别人进行更改，出了加密的方法还有什么方法呢？文档加密，总是给人一种不友好的感觉，下面，我教大家另外一种方法，将文档标记为最终状态，让人不能编辑。
+                                            </span>
+                                        </el-row>
+                                        <el-row style="margin-top: 10px;">
+                                            <el-col :span="8">分类：厄尔</el-col>
+                                            <el-col :span="8">时间：2020-01-01</el-col>
+                                            <el-col :span="8">阅读量：222</el-col>
+                                        </el-row>
+                                    </el-col>
+                                </el-row>
+                                <el-row gutter="24" style="margin-top: 20px;">
+                                    <el-col :span="8">
+                                        <img style="width: 200px;height: 140px;" class='content-img'
+                                            src="http://zf022006.demo.kangjingept.com/demo179/uploads/200330/1-2003301I501459.gif">
+                                    </el-col>
+                                    <el-col :span="16" style="text-align: justify">
+                                        <el-row>
+                                            <span style="font-size: 24px;font-weight: bold;">将Word2013文档设为最终版本
+                                            </span>
+                                        </el-row>
+                                        <el-row style="margin-top: 10px;">
+                                            <span>
+                                                我们做好了一份文档，并不希望别人进行更改，出了加密的方法还有什么方法呢？文档加密，总是给人一种不友好的感觉，下面，我教大家另外一种方法，将文档标记为最终状态，让人不能编辑。
+                                            </span>
+                                        </el-row>
+                                        <el-row style="margin-top: 10px;">
+                                            <el-col :span="8">分类：厄尔</el-col>
+                                            <el-col :span="8">时间：2020-01-01</el-col>
+                                            <el-col :span="8">阅读量：222</el-col>
+                                        </el-row>
+                                    </el-col>
+                                </el-row>
+                                <el-row gutter="24" style="margin-top: 20px;">
+                                    <el-col>
+                                        <el-pagination background layout="prev, pager, next" :total="103">
+                                        </el-pagination>
+                                    </el-col>
+                                </el-row>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-row gutter="20">
+                                    <el-col>
+                                        <el-card class="box-card">
+                                            <el-row>
+                                                <el-col>随机文章</el-col>
+                                            </el-row>
+                                            <el-row gutter="24" style="margin-top: 20px;">
+                                                <el-col :span="8">
+                                                    <img style="width: 80px;height: 60px;" class='content-img'
+                                                        src="http://zf022006.demo.kangjingept.com/demo179/uploads/200330/1-2003301I501459.gif">
+                                                </el-col>
+                                                <el-col :span="16" style="text-align: justify">
+                                                    <el-row>
+                                                        <span style="font-size: 10px;font-weight: bold;">将Word2013文档设为最终版本
+                                                        </span>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col>幸运码：33</el-col>
+                                                    </el-row>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row gutter="24" style="margin-top: 20px;">
+                                                <el-col :span="8">
+                                                    <img style="width: 80px;height: 60px;" class='content-img'
+                                                        src="http://zf022006.demo.kangjingept.com/demo179/uploads/200330/1-2003301I501459.gif">
+                                                </el-col>
+                                                <el-col :span="16" style="text-align: justify">
+                                                    <el-row>
+                                                        <span style="font-size: 10px;font-weight: bold;">将Word2013文档设为最终版本
+                                                        </span>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col>幸运码：33</el-col>
+                                                    </el-row>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row gutter="24" style="margin-top: 20px;">
+                                                <el-col :span="8">
+                                                    <img style="width: 80px;height: 60px;" class='content-img'
+                                                        src="http://zf022006.demo.kangjingept.com/demo179/uploads/200330/1-2003301I501459.gif">
+                                                </el-col>
+                                                <el-col :span="16" style="text-align: justify">
+                                                    <el-row>
+                                                        <span style="font-size: 10px;font-weight: bold;">将Word2013文档设为最终版本
+                                                        </span>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col>幸运码：33</el-col>
+                                                    </el-row>
+                                                </el-col>
+                                            </el-row>
+                                            <el-row gutter="24" style="margin-top: 20px;">
+                                                <el-col :span="8">
+                                                    <img style="width: 80px;height: 60px;" class='content-img'
+                                                        src="http://zf022006.demo.kangjingept.com/demo179/uploads/200330/1-2003301I501459.gif">
+                                                </el-col>
+                                                <el-col :span="16" style="text-align: justify">
+                                                    <el-row>
+                                                        <span style="font-size: 10px;font-weight: bold;">将Word2013文档设为最终版本
+                                                        </span>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col>幸运码：33</el-col>
+                                                    </el-row>
+                                                </el-col>
+                                            </el-row>
+                                          </el-card>
+                                    </el-col>
+                                </el-row>
+                            </el-col>
+                        </el-row>
+                    </el-col>
+                    <el-col :span="3">
+                        <!-- 预留位置 -->
+                    </el-col>
+                </el-row>
+                <el-row class="el-footer">
+                    <el-col :span="12" :offset="6">
+                        Copyright © 2018-2020 书山有路勤为径 学海无涯苦作舟
+                    </el-col>
+                </el-row>
+            </el-main>
+        </el-container>
+    </div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                courseList: [{
+                    id: "111",
+                    courseName: '随e机森林预测 Titanic 生还概率',
+                    level: "中级 128学习",
+                    courseImg: "../../static/test.png"
+                }, ],
+                activeIndex: '1',
+                src: 'https://www.easyicon.net/api/resizeApi.php?id=1100254&size=48',
+                sea: 'https://www.easyicon.net/api/resizeApi.php?id=1100256&size=48',
+                bannerList: [{
+                    id: 1,
+                    img: './b1.jpg'
+                }, {
+                    id: 2,
+                    img: './b2.jpg'
+                }, {
+                    id: 3,
+                    img: './b3.jpg'
+                }, ],
+                a1: "./a1.jpg",
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1517 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1516 弄'
+                }]
+
+            }
+        },
+        methods: {
+            linkToCourse: function (id) {
+                debugger
+                //打开新的窗口和页面
+                // window.location.href="/detail/" + id;
+                window.open("/detail/" + id, "_blank");
+            },
+            clickBtn: function () {
+                debugger
+            }
+        }
+    })
+</script>
+
+</html>

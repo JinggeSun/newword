@@ -24,16 +24,22 @@ public class DbUtil {
         if (screwModel == null) {
             return "数据库实体错误";
         }
-        //测试连接
-        DataSource dataSource = getDataSourceByJdbc(screwModel);
-        Connection connection = null;
         try {
+            //测试连接
+            DataSource dataSource = getDataSourceByJdbc(screwModel);
+            if (dataSource == null){
+                return "数据库连接异常！";
+            }
+            Connection connection = null;
             connection = dataSource.getConnection();
+            if (connection == null){
+                return "数据库连接异常！";
+            }
             flag = "";
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            return e.getMessage();
+            return "数据库连接异常！";
         }
         return flag;
     }
@@ -43,20 +49,30 @@ public class DbUtil {
     }
 
     private static DataSource getDataSourceByJdbc(ScrewModel screwModel){
-        //数据源
-        HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName(screwModel.getDriverClassName());
-        hikariConfig.setJdbcUrl(screwModel.getJdbcUrl());
-        hikariConfig.setUsername(screwModel.getUserName());
-        hikariConfig.setPassword(screwModel.getPassword());
-        /**
-         * 设置可以获取tables remarks信息
-         * 以下配置可以继续在页面配置中展示出来
-         * TODO v1
-         */
-        hikariConfig.addDataSourceProperty("useInformationSchema", "true");
-        hikariConfig.setMinimumIdle(2);
-        hikariConfig.setMaximumPoolSize(5);
-        return new HikariDataSource(hikariConfig);
+
+        DataSource dataSource = null;
+
+        try {
+            //数据源
+            HikariConfig hikariConfig = new HikariConfig();
+            hikariConfig.setDriverClassName(screwModel.getDriverClassName());
+            hikariConfig.setJdbcUrl(screwModel.getJdbcUrl());
+            hikariConfig.setUsername(screwModel.getUserName());
+            hikariConfig.setPassword(screwModel.getPassword());
+            /**
+             * 设置可以获取tables remarks信息
+             * 以下配置可以继续在页面配置中展示出来
+             * TODO v1
+             */
+            hikariConfig.addDataSourceProperty("useInformationSchema", "true");
+            hikariConfig.setMinimumIdle(2);
+            hikariConfig.setMaximumPoolSize(5);
+            dataSource = new HikariDataSource(hikariConfig);
+        }catch (Exception e){
+            //e.printStackTrace();
+            return null;
+        }
+
+        return dataSource;
     }
 }

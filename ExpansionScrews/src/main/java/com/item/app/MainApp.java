@@ -7,7 +7,6 @@ import cn.smallbun.screw.core.engine.EngineTemplateType;
 import cn.smallbun.screw.core.execute.DocumentationExecute;
 import cn.smallbun.screw.core.process.ProcessConfig;
 import com.item.app.view.StartView;
-import com.sun.tools.javadoc.Start;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -21,16 +20,17 @@ public class MainApp {
 
     public static void main(String[] args) {
 
+       // test();
         StartView startView = new StartView();
         startView.showView();
     }
 
-    public void test(){
+    public static void test(){
         String fileOutputDir = "/Users/zcm/Documents/GitHub/newword/ExpansionScrews/src/main/resources";
         //数据源
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/RefuelingWuhan");
+        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/renren_security");
         hikariConfig.setUsername("root");
         hikariConfig.setPassword("123456");
         //设置可以获取tables remarks信息
@@ -79,7 +79,7 @@ public class MainApp {
                 //版本
                 .version("1.0.0")
                 //描述
-                .description("数据库设计文档生成")
+                .description("18数据库设计文档生成")
                 //数据源
                 .dataSource(dataSource)
                 //生成配置

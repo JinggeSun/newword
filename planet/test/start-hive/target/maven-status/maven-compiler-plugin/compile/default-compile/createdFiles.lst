@@ -1,0 +1,4 @@
+META-INF/spring-configuration-metadata.json
+com/item/hive/config/MyHiveConfig.class
+com/item/hive/service/MyHiveService.class
+com/item/hive/properties/MyHiveProperties.class

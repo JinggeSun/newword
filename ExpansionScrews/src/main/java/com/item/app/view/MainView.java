@@ -31,6 +31,8 @@ public class MainView {
     public static JTextField exportField;
     public static JLabel tableLabel;
     public static JButton testButton;
+    private static JComboBox<String> typeComboBox;
+
 
     public void showView() {
         /*
@@ -159,8 +161,8 @@ public class MainView {
         JLabel typeLabel = new JLabel("导出类型");
         typeLabel.setBounds(70,240,160,30);
         // 创建一个下拉列表框
-        JComboBox<String> typeComboBox = new JComboBox<String>(ConfigApp.getExportType());
-        dbComboBox.setSelectedIndex(0);
+        typeComboBox = new JComboBox<String>(ConfigApp.getExportType());
+        typeComboBox.setSelectedIndex(0);
         typeComboBox.setBounds(175,240,200,30);
 
         //9. 测试连接
@@ -205,8 +207,8 @@ public class MainView {
             }
             //将实体发送给jdbc工具类
             String connectFlag = DbUtil.connectTest(model);
-            if (connectFlag.length() > 0){
-                JOptionPane.showMessageDialog(null, "数据库连接失败，请检查,"+connectFlag);
+            if (connectFlag != null && connectFlag.length() > 0){
+                JOptionPane.showMessageDialog(null, "数据库连接失败，请检查!");
                 return ;
             }
             JOptionPane.showMessageDialog(null, "数据库连接成功!");
@@ -225,12 +227,13 @@ public class MainView {
             }
             //将实体发送给jdbc工具类
             String connectFlag = DbUtil.connectTest(model);
-            if (connectFlag.length() > 0){
+            if (connectFlag == null  || connectFlag.length() > 0){
                 JOptionPane.showMessageDialog(null, "数据库连接失败，请检查,"+connectFlag);
                 return ;
             }
             //数据库验证完毕，开始使用screw导出
             DataSource dataSource = DbUtil.getDataSource(model);
+            System.err.println("------->" + model.getFileOutputDir());
             String msg = ScrewUtil.exportDoc(model.getFileOutputDir(),dataSource);
 
             JOptionPane.showMessageDialog(null, msg);
@@ -275,6 +278,8 @@ public class MainView {
         String usernameFieldParam = usernameField.getText();
         String passwordFieldParam = String.valueOf(passwordField.getPassword());
         String exportFieldParam = exportField.getText();
+        String typeComboParam = (String) typeComboBox.getSelectedItem();
+
 
         boolean flag = DataCheckUtil.checkStringEmpty(dbComboParam,ipFieldParam,portFieldParam,tableFieldParam,usernameFieldParam,passwordFieldParam,exportFieldParam);
 
@@ -292,6 +297,10 @@ public class MainView {
         //连接
         String url = ConfigApp.getJdbcUrl(dbComboParam,ipFieldParam,portFieldParam,tableFieldParam);
         screwModel.setJdbcUrl(url);
+        //导出路径
+        screwModel.setFileOutputDir(exportFieldParam);
+        //导出类型
+
         return screwModel;
     }
 

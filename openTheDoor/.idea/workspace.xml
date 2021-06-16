@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de70918f-ddee-4f32-ba9d-56ad2b20e6d5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/util/DbUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/util/ScrewUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/view/screw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ExpansionScrews/src/resources/image/screw.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/config/ConfigApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/config/ConfigApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/util/DataCheckUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/util/DataCheckUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/view/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/view/StartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ExpansionScrews/src/main/java/com/item/app/view/StartView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ExpansionScrews/target/classes/com/item/app/config/ConfigApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ExpansionScrews/target/classes/com/item/app/config/ConfigApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ExpansionScrews/target/classes/com/item/app/util/DataCheckUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ExpansionScrews/target/classes/com/item/app/util/DataCheckUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ExpansionScrews/target/classes/com/item/app/view/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ExpansionScrews/target/classes/com/item/app/view/MainView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ExpansionScrews/target/classes/com/item/app/view/StartView.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ExpansionScrews/target/classes/com/item/app/view/StartView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lin/starter" beforeDir="false" afterPath="$PROJECT_DIR$/../lin/starter" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +120,8 @@
       <workItem from="1597909158412" duration="399000" />
       <workItem from="1597971862248" duration="113000" />
       <workItem from="1602232761670" duration="28000" />
+      <workItem from="1604384834205" duration="49000" />
+      <workItem from="1604384916865" duration="156000" />
     </task>
     <servers />
   </component>

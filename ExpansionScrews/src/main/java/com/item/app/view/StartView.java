@@ -24,6 +24,9 @@ public class StartView {
         jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //窗口禁止拉伸
         jf.setResizable(false);
+        //设置图标
+        jf.setIconImage(new ImageIcon("src\\main\\resources\\image\\screw.png").getImage());
+
 
         /*
          * 面板

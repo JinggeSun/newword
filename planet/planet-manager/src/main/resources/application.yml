@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+# jwt 配置
+jwt:
+  secret: aaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrsssttt
+  # 有效期，单位秒，默认2周
+  expire-time-in-second: 1209600
+server:
+  servlet:
+    context-path: /planet

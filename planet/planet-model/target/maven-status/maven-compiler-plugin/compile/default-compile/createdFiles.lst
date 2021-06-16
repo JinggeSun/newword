@@ -1,0 +1,5 @@
+com/item/model/common/ModelConst.class
+com/item/model/common/JdbcConst.class
+com/item/model/entity/NamenodeJvmmetrics.class
+com/item/model/entity/NameNodeMsg.class
+com/item/model/entity/NameNodeFSNamesystem.class

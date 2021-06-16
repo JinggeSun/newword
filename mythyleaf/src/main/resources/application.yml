@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    dynamic:
+    # 设置默认数据源为db1
+      primary: db1
+      datasource:
+        db1:
+          url: jdbc:mysql://82.156.114.14:3306/algorithm_data_center
+          driver-class-name: com.mysql.jdbc.Driver
+          username: root
+          password: SUNjingge2014@
+        db2:
+          url: jdbc:mysql://82.156.114.14:3306/energy
+          driver-class-name: com.mysql.jdbc.Driver
+          username: root
+          password: SUNjingge2014@
+server:
+  port: 8081
+
+

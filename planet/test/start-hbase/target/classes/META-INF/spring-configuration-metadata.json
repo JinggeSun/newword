@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "myhbase",
+      "type": "com.item.hbase.properties.MyHbaseProperties",
+      "sourceType": "com.item.hbase.properties.MyHbaseProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "myhbase.zookeeper-ip",
+      "type": "java.lang.String",
+      "sourceType": "com.item.hbase.properties.MyHbaseProperties"
+    },
+    {
+      "name": "myhbase.zookeeper-port",
+      "type": "java.lang.String",
+      "sourceType": "com.item.hbase.properties.MyHbaseProperties"
+    }
+  ],
+  "hints": []
+}

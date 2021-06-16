@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+<!--      <link rel="stylesheet" href="{{ url_for('static', filename='element/css/index.css') }}">-->
+<!--        <link rel="stylesheet" href="/static/element/css/index.css">-->
+
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- import Vue before Element -->
+<!--<script src="[[ url_for('static',filename='element/js/vue.js') ]]"></script>-->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<!-- import JavaScript -->
+<!--<script src="[[ url_for('static',filename='element/js/index.js') ]]"></script>-->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--<script src="[[ url_for('static',filename='element/js/axios.min.js') ]]"></script>-->
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <el-container>
+      <el-header style="width: 100%;padding:0;">
+        <el-card class="box-card" shadow="always" style="border-radius:0;text-align: center;font-size: 20px;
+        font-weight: bold;font-family:Helvetica Neue">
+            网源Python调度管理平台
+        </el-card>
+    </el-header>
+      <el-main style="margin: 20px;">
+        <el-row style="padding-bottom:20px;">
+          <el-col :span="24">
+            <el-row>
+              <el-col :span="3">
+                <el-input
+                label-width="50px"
+                placeholder="请输入作业名称"
+                prefix-icon="el-icon-search"
+                v-model="input2">
+              </el-input>
+              </el-col>
+              <el-col :span="3">
+                <el-select placeholder="状态" style="padding-left: 20px;">
+                  <el-option label="运行" value="shanghai"></el-option>
+                  <el-option label="暂停" value="beijing"></el-option>
+                </el-select>
+              </el-col>
+              <el-col :span="4">
+                <el-button type="primary">查询</el-button>
+                <el-button type="info">创建</el-button>
+              </el-col>
+              <el-col :span="12">
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-row>
+
+        <el-table :data="tableData" :row-class-name="tableRowClassName" border style="width: 100%;">
+          <el-table-column prop="name" label="作业名" width="120">
+          </el-table-column>
+          <el-table-column prop="func" label="调用方法" width="200">
+          </el-table-column>
+          <el-table-column prop="start_date" label="开始时间" width="150">
+          </el-table-column>
+          <el-table-column prop="next_run_time" label="下次运行时间" width="170">
+          </el-table-column>
+          <el-table-column prop="max_instances" label="是否中断">
+          </el-table-column>
+          <el-table-column prop="trigger" label="类型"
+            :filters="[{ text: '间隔', value: 'interval' }, { text: '定时', value: 'cron' }]" :filter-method="filterTag"
+            filter-placement="bottom-end">
+            <template slot-scope="scope">
+
+            </template>
+          </el-table-column>
+          <el-table-column prop="seconds" label="说明" >
+          </el-table-column>
+<!--          <el-table-column prop="status" label="状态" >-->
+<!--          </el-table-column>-->
+          <el-table-column fixed="right" label="操作" width="300">
+            <template slot-scope="scope">
+              <el-button @click="handleClick(scope.row)" size="mini">查看</el-button>
+              <el-button @click="editClick(scope.row)"size="mini" type="danger">编辑</el-button>
+              <el-button @click="handleClick(scope.row)" size="mini" type="success">暂停</el-button>
+              <el-button @click="handleClick(scope.row)" size="mini" type="danger">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-main>
+    </el-container>
+    <el-dialog title="调度作业管理" :visible.sync="dialogFormVisible">
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="作业名称">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="作业类型">
+          <el-select v-model="form.trigger" placeholder="请选择作业类型">
+            <el-option label="间隔" value="interval"></el-option>
+            <el-option label="定时" value="cron"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item v-if="form.trigger == interval" label="间隔">
+          <el-input v-model="form.trigger"></el-input>
+        </el-form-item>
+        <el-form-item v-else label="cron">
+          <el-input v-model="form.trigger"></el-input>
+        </el-form-item>
+
+        <el-form-item label="开始时间">
+          <el-col :span="11">
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+          </el-col>
+          <el-col class="line" :span="2">-</el-col>
+          <el-col :span="11">
+            <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="作业参数">
+          <el-input type="textarea" v-model="form.desc"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">立即创建</el-button>
+          <el-button>取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+  </div>
+</body>
+<script>
+  new Vue({
+    el: '#app',
+    mounted(){
+      this.getJoBList()
+    },
+    data: function () {
+      return {
+        tableData: [],
+        dialogTableVisible: false,
+        dialogFormVisible: false,
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        formLabelWidth: '120px'
+      }
+    },
+    methods: {
+      tableRowClassName({
+        row,
+        rowIndex
+      }) {
+        if (rowIndex === 1) {
+          return 'warning-row';
+        } else if (rowIndex === 3) {
+          return 'success-row';
+        }
+        return '';
+      },
+      getJoBList() {
+        axios.get('/scheduler/jobs')
+          .then(function (response) {
+            console.log(response);
+//            this.
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      editClick(row){
+        this.form = row;
+        this.dialogFormVisible = true;
+      }
+    }
+  })
+</script>
+
+<style>
+  .el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
+    .el-footer {
+        background-color: #B3C0D1;
+        color: #333;
+        text-align: center;
+        line-height: 60px;
+        margin-top: 30px;
+    }
+
+    .el-aside {
+        background-color: #D3DCE6;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+
+    .el-main {
+        color: #333;
+        text-align: center;
+    }
+
+    .el-container:nth-child(5) .el-aside,
+    .el-container:nth-child(6) .el-aside {
+        line-height: 260px;
+    }
+
+    .el-container:nth-child(7) .el-aside {
+        line-height: 320px;
+    }
+
+    .box-card {
+        height: 100%;
+    }
+
+    .time {
+        font-size: 13px;
+        color: #999;
+    }
+
+    .bottom {
+        margin-top: 13px;
+        line-height: 12px;
+    }
+
+    .button {
+        padding: 0;
+        float: right;
+    }
+
+    .image {
+        width: 100%;
+        display: block;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+
+    .clearfix:after {
+        clear: both
+    }
+
+    html, body, #app, .el-container {
+        /*设置内部填充为0，几个布局元素之间没有间距*/
+        padding: 0px;
+        /*外部间距也是如此设置*/
+        margin: 0px;
+        /*统一设置高度为100%*/
+        height: 100%;
+    }
+</style>
+
+</html>

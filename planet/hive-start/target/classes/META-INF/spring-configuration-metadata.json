@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "myhive",
+      "type": "com.item.hive.properties.MyHiveProperties",
+      "sourceType": "com.item.hive.properties.MyHiveProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "myhive.hive-jdbc-url",
+      "type": "java.lang.String",
+      "sourceType": "com.item.hive.properties.MyHiveProperties"
+    },
+    {
+      "name": "myhive.hive-thrift-url",
+      "type": "java.lang.String",
+      "sourceType": "com.item.hive.properties.MyHiveProperties"
+    },
+    {
+      "name": "myhive.password",
+      "type": "java.lang.String",
+      "sourceType": "com.item.hive.properties.MyHiveProperties"
+    },
+    {
+      "name": "myhive.username",
+      "type": "java.lang.String",
+      "sourceType": "com.item.hive.properties.MyHiveProperties"
+    }
+  ],
+  "hints": []
+}

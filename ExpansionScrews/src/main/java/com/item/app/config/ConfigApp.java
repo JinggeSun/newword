@@ -2,9 +2,6 @@ package com.item.app.config;
 
 import cn.smallbun.screw.core.engine.EngineFileType;
 import com.item.app.model.DbModel;
-
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -68,14 +65,24 @@ public class ConfigApp {
         return type;
     }
 
-
-
-
     public static String getJdbcUrl(String type,String ipStr,String port,String tableName){
         //mysql
         //jdbc:mysql://127.0.0.1:3306/RefuelingWuhan
         if ("MySQL".equals(type)){
             return String.format("jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf8&useSSL=false\n",ipStr,port,tableName);
+        }
+
+        //oracle
+        //jdbc:oracle:thin:@localhost:1521:orcl
+        //tablename 代表这实例名
+        if ("Oracle".equals(type)){
+            return String.format("jdbc:oracle:thin:@%s:%s:%s",ipStr,port,tableName);
+        }
+
+        //sqlserver
+        //jdbc:sqlserver://localhost:1433;DatabaseName=wrySelectCourse3
+        if ("SQL Server".equals(type)){
+            return String.format("jdbc:sqlserver://%s:%s;DatabaseName=%s",ipStr,port,tableName);
         }
 
         return null;
